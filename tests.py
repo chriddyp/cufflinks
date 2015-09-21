@@ -312,6 +312,16 @@ scatter_plot_input_argument_tests()
 bubble_chart_argument_tests()
 subplot_input_argument_tests()
 shape_input_argument_tests()
+universal_argument_tests()
+pie_argument_tests()
+errorbar_argument_tests()
+
+spread_argument_tests()
+ratio_argument_tests()
+heatmap_argument_tests()
+surface_argument_tests()
+bubble3d_argument_tests()
+scatter3d_argument_tests()
 
 if __name__ == '__main__':
     unittest.main()
