@@ -42,7 +42,7 @@ def bar_input_argument_tests():
         'kind': ['bar', 'barh'],
         'barmode': ['stack', 'overlay', 'group'],
         'bargap': [0.1],
-        'subplots': [True]
+        'orientation': ['h', 'v']
     }
 
     def bar_test(self, **kwargs):
@@ -55,8 +55,9 @@ def bar_row_input_argument_tests():
     options = {
         'kind': ['bar', 'barh'],
         'barmode': ['stack', 'overlay', 'group'],
+        'sortbars': [True, False],
         'bargap': [0.1],
-        'subplots': [True]
+        'bargroupgap': [0.2]
     }
 
     def bar_row_test(self, **kwargs):
@@ -69,8 +70,10 @@ def histogram_input_argument_tests():
     options = {
         'barmode': ['stack'],
         'bins': [20],
-        'orientation': ['h', 'v', 'horizontal', 'vertical'],
-        'histnorm': ['propbability'],
+        'orientation': ['h', 'v'],
+        'histnorm': ['', 'percent', 'propbability',
+                     'density', 'propbability density'],
+        'histfunc': ['count', 'sum', 'avg', 'min', 'max'],
         'subplots': [True]
     }
 
@@ -81,7 +84,9 @@ def histogram_input_argument_tests():
 
 
 def box_input_argument_tests():
-    options = {}
+    options = {
+        'orientation': ['h', 'v']
+    }
 
     def box_test(self, **kwargs):
         self._iplot(self.df, kind='box', **kwargs)
@@ -93,7 +98,8 @@ def area_plot_input_argument_tests():
     options = {
         'fill': [True],
         'opacity': [1],
-        'kind': ['area']
+        'kind': ['area'],
+        'width': [5]
     }
 
     def area_test(self, **kwargs):
@@ -106,10 +112,16 @@ def scatter_plot_input_argument_tests():
     options = {
         'x': ['x'],
         'y': ['y'],
-        'mode': ['markers'],
+        'text': ['x'],
+        'mode': ['markers', 'lines', 'lines+markers'],
         'symbol': ['dot'],
-        'colors': [['orange', 'teal']],
-        'size': [10]
+        'size': [10],
+        'width': [5],
+        'bestfit': [
+            True,
+            # ['x'],
+            # ['x', 'y']
+        ]
     }
 
     def scatter_test(self, **kwargs):
@@ -149,20 +161,113 @@ def shape_input_argument_tests():
     df = cf.datagen.lines(3, columns=['a', 'b', 'c'])
     options = {
         'hline': [
+            [2],
             [2, 4],
             [dict(y=-1, color='blue', width=3),
              dict(y=1, color='pink', dash='dash')]],
-        'vline': [['2015-02-10']],
-        'hspan': [[(-1, 1), (2, 5)]],
-        'vspan': [{
-            'x0': '2015-02-15', 'x1': '2015-03-15',
-            'color': 'teal', 'fill': True, 'opacity': .4}]
+        'vline': [
+            [2],
+            [2, 4],
+            [dict(y=-1, color='blue', width=3),
+             dict(y=1, color='pink', dash='dash')]],
+        'hspan': [
+            [(-1, 1), (2, 5)],
+            {'x0': '2015-02-15', 'x1': '2015-03-15',
+             'color': 'teal', 'fill': True, 'opacity': .4}
+        ],
+        'vspan': [
+            [(-1, 1), (2, 5)],
+            {'x0': '2015-02-15', 'x1': '2015-03-15',
+             'color': 'teal', 'fill': True, 'opacity': .4}
+        ]
     }
 
     def shape_tests(self, **kwargs):
         self._iplot(df, **kwargs)
 
     _generate_tests(TestIPlot, shape_tests, 'shape', options)
+
+
+def universal_argument_tests():
+    # test all permutations of options that are shared across all chart types
+    options = {
+        'kind': ['scatter', 'bar', 'box', 'spread', 'ratio', 'heatmap',
+                 'surface', 'histogram', 'bubble', 'bubble3d', 'scatter3d'],
+        'title': ['my title'],
+        'xTitle': ['my xaxis title'],
+        'yTitle': ['my yaxis title'],
+        'theme': cf.getThemes(),
+        'colors': ['blue', ['red', 'white', 'blue'],
+                   {'x': 'red', 'y': 'white', 'c': 'blue'}],
+        'annotations': [{4: 'my annotation'}],
+        'gridcolor': ['grey'],
+        'zerolinecolor': ['blue'],
+        'margin': [(3, 4, 3, 1), {'l': 3, 'r': 5, 't': 1, 'b': 0}],
+        'secondary_y': ['c', ['b', 'c']],
+        'colors': [('blue', 'red', 'orange'),
+                   {'x': 'blue', 'y': 'red', 'c': 'green'}],
+        'subplots': [True]
+    }
+
+    def iplot_tests(self, **kwargs):
+        self._iplot(self.df, **kwargs)
+
+    _generate_tests(TestIPlot, iplot_tests, 'universal', options)
+
+
+def pie_argument_tests():
+    options = {
+        'sort': [True, False],
+        'pull': [0.5],
+        'hole': [0.4],
+        'textposition': ['outside', 'inner']
+    }
+
+    def pie_tests(self, **kwargs):
+        self._iplot(self.df, kind='pie', **kwargs)
+
+    _generate_tests(TestIPlot, pie_tests, 'pie', options)
+
+
+def errorbar_argument_tests():
+    options = {
+        'error_trace': ['x'],
+        'error_color': ['blue'],
+        'error_thickness': [5],
+        'error_width': [3],
+        'error_opacity': [0.5],
+        'kind': ['bar', 'barh', 'scatter', 'histogram', 'scatter3d']
+    }
+
+    def errorbar_tests(self, **kwargs):
+        self._iplot(self.df, **kwargs)
+
+    _generate_tests(TestIPlot, errorbar_tests, 'errorbar', options)
+
+
+def spread_argument_tests():
+    pass
+
+
+def ratio_argument_tests():
+    pass
+
+
+def heatmap_argument_tests():
+    pass
+
+
+def surface_argument_tests():
+    pass
+
+
+def bubble3d_argument_tests():
+    pass
+
+
+def scatter3d_argument_tests():
+    pass
+
 
 # test generators
 
