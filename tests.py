@@ -211,10 +211,33 @@ def universal_argument_tests():
         'subplots': [True]
     }
 
+    def call_iplot(self, **kwargs):
+        self._iplot(self.df, **kwargs)
+    _generate_tests(TestIPlot, call_iplot, 'kind', {'kind': options['kind']})
+
+    def options_test(self, **kwargs):
+        self._iplot(
+            self.df,
+            title=options['title'][0],
+            xTitle=options['xTitle'][0],
+            yTitle=options['yTitle'][0],
+            annotations=options['annotations'][0],
+            gridcolor=options['gridcolor'][0],
+            zerolinecolor=options['zerolinecolor'][0]
+        )
+
+    _generate_tests(TestIPlot, options_test, 'kind', {
+        'kind': options['kind'],
+        'margin': options['margin'],
+        'theme': options['theme'],
+        'secondary_y': options['secondary_y'],
+        'colors': options['colors'],
+        'subplots': options['subplots']
+    })
+
     def iplot_tests(self, **kwargs):
         self._iplot(self.df, **kwargs)
 
-    _generate_tests(TestIPlot, iplot_tests, 'universal', options)
     def scatter3d_tests(self, **kwargs):
         self._iplot(self.df, kind='scatter3d', x='x', y='y', z='c', **kwargs)
 
