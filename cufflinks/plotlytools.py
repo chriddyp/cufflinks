@@ -1,6 +1,6 @@
 import pandas as pd
 import plotly.plotly as py
-import tools 
+import tools
 import offline
 from plotly.graph_objs import *
 from collections import defaultdict
@@ -28,7 +28,7 @@ def getAnnotations(df,annotations):
 	-----------
 		df : DataFrame
 			Original DataFrame of values
-		annotations : dictionary 
+		annotations : dictionary
 			Dictionary of annotations
 			{x_point : text}
 	"""
@@ -69,7 +69,7 @@ def iplot_to_dict(data):
 	for i in data:
 		for k,v in i.items():
 			d[i['name']][k]=v
-	return d 
+	return d
 
 def dict_to_iplot(d):
 	l=[]
@@ -82,14 +82,14 @@ def _to_iplot(self,colors=None,colorscale=None,kind='scatter',mode='lines',symbo
 		width=3,dash='solid',sortbars=False,keys=False,bestfit=False,bestfit_colors=None,
 		mean=False,mean_colors=None,asDates=False,asTimestamp=False,text=None,**kwargs):
 	"""
-	Generates a plotly Data object 
+	Generates a plotly Data object
 
 	Parameters
 	----------
 		colors : list or dict
 			{key:color} to specify the color for each column
 			[colors] to use the colors in the defined order
-		colorscale : str 
+		colorscale : str
 			Color scale name
 			Only valid if 'colors' is null
 			See cufflinks.colors.scales() for available scales
@@ -104,7 +104,7 @@ def _to_iplot(self,colors=None,colorscale=None,kind='scatter',mode='lines',symbo
 				lines+markers
 				lines+text
 				markers+text
-				lines+markers+text		
+				lines+markers+text
 		symbol : string
 			The symbol that is drawn on the plot for each marker
 			Valid only when mode includes markers
@@ -117,8 +117,8 @@ def _to_iplot(self,colors=None,colorscale=None,kind='scatter',mode='lines',symbo
 				triangle-right
 				triangle-up
 				x
-		size : string or int 
-			Size of marker 
+		size : string or int
+			Size of marker
 			Valid only if marker in mode
 		fill : bool
 			Filled Traces
@@ -137,17 +137,17 @@ def _to_iplot(self,colors=None,colorscale=None,kind='scatter',mode='lines',symbo
 			List of columns to chart.
 			Also can be usded for custom sorting.
 		bestfit : boolean or list
-			If True then a best fit line will be generated for 
-			all columns. 
-			If list then a best fit line will be generated for 
-			each key on the list. 
+			If True then a best fit line will be generated for
+			all columns.
+			If list then a best fit line will be generated for
+			each key on the list.
 		bestfit_colors : list or dict
 			{key:color} to specify the color for each column
 			[colors] to use the colors in the defined order
 		asDates : bool
 			If true it forces truncates times from a DatetimeIndex
-		
-	""" 
+
+	"""
 	df=self.copy()
 
 	if asTimestamp:
@@ -164,7 +164,7 @@ def _to_iplot(self,colors=None,colorscale=None,kind='scatter',mode='lines',symbo
 	if type(df)==pd.core.series.Series:
 		df=pd.DataFrame({df.name:df})
 
-	if not keys:		
+	if not keys:
 		if 'bar' in kind:
 			if sortbars:
 				keys=df.sum().sort(inplace=False,ascending=False).keys()
@@ -275,9 +275,9 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 				histogram
 				bubble
 				bubble3d
-				scatter3d		
+				scatter3d
 		title : string
-			Chart Title				
+			Chart Title
 		xTitle : string
 			X Axis Title
 		yTitle : string
@@ -290,22 +290,22 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 			Layout Theme
 				solar
 				pearl
-				white		
-			see cufflinks.getThemes() for all 
+				white
+			see cufflinks.getThemes() for all
 			available themes
 		colors : list or dict
 			{key:color} to specify the color for each column
 			[colors] to use the colors in the defined order
-		colorscale : str 
+		colorscale : str
 			Color scale name
-			If the color name is preceded by a minus (-) 
+			If the color name is preceded by a minus (-)
 			then the scale is inversed
 			Only valid if 'colors' is null
 			See cufflinks.colors.scales() for available scales
 		fill : bool
-			Filled Traces		
+			Filled Traces
 		width : int
-			Line width	
+			Line width
 		dash : string
 			Drawing style of lines
 				solid
@@ -319,7 +319,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 				lines+markers
 				lines+text
 				markers+text
-				lines+markers+text		
+				lines+markers+text
 		symbol : string
 			The symbol that is drawn on the plot for each marker
 			Valid only when mode includes markers
@@ -332,8 +332,8 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 				triangle-right
 				triangle-up
 				x
-		size : string or int 
-			Size of marker 
+		size : string or int
+			Size of marker
 			Valid only if marker in mode
 		barmode : string
 			Mode when displaying bars
@@ -351,9 +351,9 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 		bargroupgap : float
 			Set the gap between groups
 				[0,1)
-			* Only valid when kind is 'histogram' or 'bar'		
+			* Only valid when kind is 'histogram' or 'bar'
 		bins : int
-			Specifies the number of bins 
+			Specifies the number of bins
 			* Only valid when kind='histogram'
 		histnorm : string
 				'' (frequency)
@@ -362,7 +362,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 				density
 				probability density
 			Sets the type of normalization for an histogram trace. By default
-			the height of each bar displays the frequency of occurrence, i.e., 
+			the height of each bar displays the frequency of occurrence, i.e.,
 			the number of times this value was found in the
 			corresponding bin. If set to 'percent', the height of each bar
 			displays the percentage of total occurrences found within the
@@ -383,10 +383,10 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 				avg
 				min
 				max
-		   Sets the binning function used for an histogram trace. 
-			* Only valid when kind='histogram'           
+		   Sets the binning function used for an histogram trace.
+			* Only valid when kind='histogram'
 		orientation : string
-				h 
+				h
 				v
 			Sets the orientation of the bars. If set to 'v', the length of each
  |          bar will run vertically. If set to 'h', the length of each bar will
@@ -411,19 +411,19 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 			each key on the list.
 		bestfit_colors : list or dict
 			{key:color} to specify the color for each column
-			[colors] to use the colors in the defined order	
+			[colors] to use the colors in the defined order
 		categories : string
 			Name of the column that contains the categories
 		x : string
-			Name of the column that contains the x axis values		
+			Name of the column that contains the x axis values
 		y : string
 			Name of the column that contains the y axis values
 		z : string
-			Name of the column that contains the z axis values					
+			Name of the column that contains the z axis values
 		text : string
-			Name of the column that contains the text values	
+			Name of the column that contains the text values
 		gridcolor : string
-			Grid color	
+			Grid color
 		zerolinecolor : string
 			Zero line color
 		margin : dict or tuple
@@ -432,15 +432,15 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 			right, bottom and top margins
 		labels : string
 			Name of the column that contains the labels.
-			* Only valid when kind='pie' 
+			* Only valid when kind='pie'
 		values : string
 			Name of the column that contains the values.
 			* Only valid when kind='pie'
 		secondary_y : string or list(string)
-			Name(s) of the column to be charted on the 
+			Name(s) of the column to be charted on the
 			right hand side axis
 		subplots : bool
-			If true then each trace is placed in 
+			If true then each trace is placed in
 			subplot layout
 		shape : (rows,cols)
 			Tuple indicating the size of rows and columns
@@ -452,7 +452,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 			error values for the y axis
 		error_type : string
 			type of error bars
-				'data' 
+				'data'
 				'constant'
 				'percent'
 				'sqrt'
@@ -460,7 +460,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 				'continuous_percent'
 		asFrame : bool
 			If true then the data component of Figure will
-			be of Pandas form (Series) otherwise they will 
+			be of Pandas form (Series) otherwise they will
 			be index values
 		asDates : bool
 			If true it truncates times from a DatetimeIndex
@@ -471,53 +471,53 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 			* Only valid when asImage=True
 		dimensions : tuple(int,int)
 			Dimensions for image
-				(width,height)		
+				(width,height)
 		asPlot : bool
 			If True the chart opens in browser
 		asUrl : bool
-			If True the chart url is returned. No chart is displayed. 
+			If True the chart url is returned. No chart is displayed.
 		online : bool
-			If True then the chart is rendered on the server 
-			even when running in offline mode. 
+			If True then the chart is rendered on the server
+			even when running in offline mode.
 
 		Other Kwargs
 		============
-		
+
 		Pie charts
 			sort : bool
 				If True it sorts the labels by value
 			pull : float [0-1]
-				Pulls the slices from the centre 
+				Pulls the slices from the centre
 			hole : float [0-1]
 				Sets the size of the inner hole
-			textposition : string 
+			textposition : string
 				Sets the position of the legends for each slice
 					outside
 					inner
-			textinfo : string 
-				Sets the information to be displayed on 
-				the legends 
+			textinfo : string
+				Sets the information to be displayed on
+				the legends
 					label
 					percent
 					value
-					* or ony combination of the above using 
+					* or ony combination of the above using
 					  '+' between each item
 					  ie 'label+percent'
 
 		Error Bars
 			error_trace : string
-				Name of the column for which error should be 
-				plotted. If omitted then errors apply to all 
+				Name of the column for which error should be
+				plotted. If omitted then errors apply to all
 				traces.
 			error_values_minus : int or float or [int or float]
-				Values corresponding to the span of the error bars 
+				Values corresponding to the span of the error bars
 				below the trace coordinates
 			error_color : string
 				Color for error bars
-			error_thickness : float 
+			error_thickness : float
 				Sets the line thickness of the error bars
 			error_width :  float
-				Sets the width (in pixels) of the cross-bar at both 
+				Sets the width (in pixels) of the cross-bar at both
 				ends of the error bars
 			error_opacity : float [0,1]
 				Opacity for the error bars
@@ -541,27 +541,27 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 
 		Shapes
 			hline : int, list or dict
-				Draws a horizontal line at the 
+				Draws a horizontal line at the
 				indicated y position(s)
 				Extra parameters can be passed in
 				the form of a dictionary (see shapes)
 			vline : int, list or dict
-				Draws a vertical line at the 
+				Draws a vertical line at the
 				indicated x position(s)
 				Extra parameters can be passed in
 				the form of a dictionary (see shapes)
 			hline : [y0,y1]
-				Draws a horizontal rectangle at the 
+				Draws a horizontal rectangle at the
 				indicated (y0,y1) positions.
 				Extra parameters can be passed in
 				the form of a dictionary (see shapes)
 			vline : [x0,x1]
-				Draws a vertical rectangle at the 
+				Draws a vertical rectangle at the
 				indicated (x0,x1) positions.
 				Extra parameters can be passed in
 				the form of a dictionary (see shapes)
 			shapes : dict or list(dict)
-				List of dictionaries with the 
+				List of dictionaries with the
 				specifications of a given shape.
 				See help(cufflinks.tools.get_shape)
 				for more information
@@ -577,7 +577,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 					'error_width','error_opacity']
 	kwargs_list = [tools.__LAYOUT_KWARGS,OHLC_KWARGS,PIE_KWARGS,SUBPLOT_KWARGS,ERROR_KWARGS]
 	[valid_kwargs.extend(_) for _ in kwargs_list]
-	
+
 
 	for key in kwargs.keys():
 		if key not in valid_kwargs:
@@ -612,7 +612,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 	# We assume we are good citizens
 	validate=True
 
-	
+
 
 	if not layout:
 		l_kwargs=dict([(k,kwargs[k]) for k in tools.__LAYOUT_KWARGS if k in kwargs])
@@ -630,11 +630,11 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 				df=df.set_index(categories)
 				fig=df.figure(kind=kind,colors=colors,colorscale=colorscale,fill=fill,width=width,sortbars=sortbars,
 						asDates=asDates,mode=mode,symbol=symbol,size=size,text=text,barmode=barmode,orientation=orientation)
-				data=fig['data']			
+				data=fig['data']
 			else:
 				_keys=pd.unique(self[categories])
-				colors=get_colors(colors,colorscale,_keys)	
-				mode='markers' if 'markers' not in mode else mode 
+				colors=get_colors(colors,colorscale,_keys)
+				mode='markers' if 'markers' not in mode else mode
 				for _ in _keys:
 					__=self[self[categories]==_].copy()
 					if text:
@@ -646,7 +646,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 					if 'bubble' in kind:
 						rg=__[size].values
 						rgo=self[size].values
-						_size=[int(100*(float(i)-rgo.min())/(rgo.max()-rgo.min()))+12 for i in rg]		
+						_size=[int(100*(float(i)-rgo.min())/(rgo.max()-rgo.min()))+12 for i in rg]
 					else:
 						_size=size
 					_data=Scatter3d(x=_x,y=_y,mode=mode,name=_,
@@ -679,7 +679,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 						text=self[text].values
 				data=df.to_iplot(colors=colors,colorscale=colorscale,kind=kind,fill=fill,width=width,dash=dash,sortbars=sortbars,keys=keys,
 						bestfit=bestfit,bestfit_colors=bestfit_colors,mean=mean,mean_colors=mean_colors,asDates=asDates,mode=mode,symbol=symbol,size=size,
-						text=text,**kwargs)				
+						text=text,**kwargs)
 				if kind in ('spread','ratio'):
 						if kind=='spread':
 							trace=self.apply(lambda x:x[0]-x[1],axis=1)
@@ -707,10 +707,10 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 					for trace in data:
 						trace.update(orientation=orientation)
 						if kind=='barh':
-							trace['x'],trace['y']=trace['y'],trace['x']	
-						
+							trace['x'],trace['y']=trace['y'],trace['x']
+
 			elif kind=='bubble':
-				mode='markers' if 'markers' not in mode else mode 
+				mode='markers' if 'markers' not in mode else mode
 				x=self[x].values.tolist()
 				y=self[y].values.tolist()
 				z=size if size else z
@@ -733,8 +733,8 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 				data=Data()
 				clrs=get_colors(colors,colorscale,df.columns)
 				if 'hist' in kind:
-					barmode = 'overlay' if barmode=='' else	 barmode 
-					layout.update(barmode=barmode) 
+					barmode = 'overlay' if barmode=='' else	 barmode
+					layout.update(barmode=barmode)
 				columns=keys if keys else df.columns
 				for _ in columns:
 					if kind=='box':
@@ -750,7 +750,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 							del __['x']
 						if bins:
 							if orientation=='h':
-								__.update(nbinsy=bins)	
+								__.update(nbinsy=bins)
 							else:
 								__.update(nbinsx=bins)
 					data.append(__)
@@ -774,7 +774,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 					rg=self[size].values
 					size=[int(100*(float(_)-rg.min())/(rg.max()-rg.min()))+12 for _ in rg]
 				else:
-					size=[size for _ in range(len(keys))]	
+					size=[size for _ in range(len(keys))]
 
 				_data=Scatter3d(x=df[x].values.tolist(),y=df[y].values.tolist(),z=df[z].values.tolist(),mode=mode,name=keys,
 									marker=Marker(color=colors,symbol=symbol,size=size,opacity=.8))
@@ -787,9 +787,9 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 				marker={'colors':get_colors(colors,colorscale,labels,asList=True)}
 				line={}
 				if 'linecolor' in kwargs:
-					line['color']=kwargs['linecolor'] 
+					line['color']=kwargs['linecolor']
 				if width:
-					line['width']=width 
+					line['width']=width
 				if line:
 					marker['line']=line
 				pie={'type':'pie','values':values,'labels':labels,'name':'',
@@ -805,9 +805,9 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 			elif kind in ['candle','ohlc']:
 				d=tools._ohlc_dict(self)
 				if len(d.keys())!=4:
-					raise Exception("OHLC type of charts require an Open, High, Low and Close column")				
+					raise Exception("OHLC type of charts require an Open, High, Low and Close column")
 				ohlc_kwargs=check_kwargs(kwargs,OHLC_KWARGS)
-				if kind=='candle':					
+				if kind=='candle':
 					fig=tools.get_candle(self,theme=theme,**ohlc_kwargs)
 				else:
 					fig=tools.get_ohlc(self,theme=theme,**ohlc_kwargs)
@@ -817,7 +817,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 					fig['data'].append(bf[1])
 				data=fig['data']
 				layout=fig['layout']
-	
+
 ## Sharing Values
 	if all(['world_readable' in kwargs,sharing is None]):
 		sharing=kwargs['world_readable']
@@ -835,7 +835,7 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 		else:
 			filename='Plotly Playground {0}'.format(time.strftime("%Y-%m-%d %H:%M:%S"))
 
-	
+
 
 ## Figure defintion
 	figure=Figure()
@@ -860,20 +860,20 @@ def _iplot(self,data=None,layout=None,filename='',sharing=None,
 			if error_y:
 				kw['values']=error_y
 				figure=set_error('y',**kw)
-## Subplots 
+## Subplots
 
 	if subplots:
 		fig=tools.strip_figures(figure)
-		kw=check_kwargs(kwargs,SUBPLOT_KWARGS)	
+		kw=check_kwargs(kwargs,SUBPLOT_KWARGS)
 		if 'subplot_titles' in kwargs:
 			if kwargs['subplot_titles']==True:
 				kw['subplot_titles']=[d['name'] for d in data]
 			else:
-				kw['subplot_titles']=kwargs['subplot_titles']		
+				kw['subplot_titles']=kwargs['subplot_titles']
 		figure=tools.subplots(fig,shape,base_layout=layout,theme=theme,**kw)
 
 
-## Exports 
+## Exports
 	validate = False if 'shapes' in layout else validate
 
 	if asFigure:
@@ -913,7 +913,7 @@ def get_colors(colors,colorscale,keys,asList=False):
 
 def _scatter_matrix(self,theme=None,bins=10,color='grey',size=2, **iplot_kwargs):
 	"""
-	Displays a matrix with scatter plot for each pair of 
+	Displays a matrix with scatter plot for each pair of
 	Series in the DataFrame.
 	The diagonal shows a histogram for each of the Series
 
@@ -953,7 +953,7 @@ def iplot(data_or_figure,validate=True,sharing=None,filename='',online=None,**kw
 	data_or_figure : figure
 		Plotly figure to be charted
 	validate : bool
-		If True then all values are validated before 
+		If True then all values are validated before
 		it is charted
 	sharing : string
 		Sets the sharing level permission
@@ -963,7 +963,7 @@ def iplot(data_or_figure,validate=True,sharing=None,filename='',online=None,**kw
 	filename : string
 		Name to be used to save the file in the server
 	online : bool
-		If True then charts are rendered in the server 
+		If True then charts are rendered in the server
 	"""
 	valid_kwargs=['world_readable']
 	for key in kwargs.keys():
@@ -1029,13 +1029,13 @@ def _ta_plot(self,study,periods=14,column=None,include=True,str=None,detail=Fals
 					'study: {study} - period: {period}'
 			detail : bool
 				If True the supporting data/calculations
-				are included in the chart 
+				are included in the chart
 			study_colors : string or [string]
 				Colors to be used for the studies
 
 		Study Specific Parameters
 		-------------------------
-		RSI 
+		RSI
 			rsi_upper : int (0,100]
 				Level for the upper rsi band
 			rsi_lower : int (0,100]
@@ -1049,14 +1049,14 @@ def _ta_plot(self,study,periods=14,column=None,include=True,str=None,detail=Fals
 			slow_period : int
 				Number of periods for the slow moving average
 			signal_period : int
-				Number of periods for the signal 
+				Number of periods for the signal
 		CORREL
 			how : string
 				Method for the correlation calculation
 					values
 					pct_cht
 					diff
-					
+
 	"""
 	if 'columns' in iplot_kwargs:
 		column=iplot_kwargs['columns']
@@ -1105,7 +1105,7 @@ def _ta_plot(self,study,periods=14,column=None,include=True,str=None,detail=Fals
 		if 'legend' in iplot_kwargs:
 			iplot_study_kwargs['legend']=iplot_kwargs['legend']
 		fig_0=df.figure(**iplot_kwargs)
-		df_ta=func(df,column=column,include=False,str=str,**study_kwargs)	
+		df_ta=func(df,column=column,include=False,str=str,**study_kwargs)
 		kind=iplot_kwargs['kind'] if 'kind' in iplot_kwargs else ''
 		iplot_study_kwargs['kind']='scatter'
 		iplot_study_kwargs['colors']='blue' if 'colors' not in iplot_study_kwargs else iplot_study_kwargs['colors']
@@ -1119,7 +1119,7 @@ def _ta_plot(self,study,periods=14,column=None,include=True,str=None,detail=Fals
 			figure=get_subplots([fig_0,fig_1]) if include else fig_1
 		return figure
 
-	study_kwargs={}  
+	study_kwargs={}
 	iplot_study_kwargs={}
 	for k in iplot_kwargs.keys():
 		if 'study' in k:
@@ -1128,7 +1128,7 @@ def _ta_plot(self,study,periods=14,column=None,include=True,str=None,detail=Fals
 	for k in __TA_KWARGS:
 		if k in iplot_kwargs:
 			study_kwargs[k]=iplot_kwargs[k]
-			del iplot_kwargs[k]	
+			del iplot_kwargs[k]
 
 	if study=='rsi':
 		study_kwargs.update({'periods':periods})
@@ -1141,7 +1141,7 @@ def _ta_plot(self,study,periods=14,column=None,include=True,str=None,detail=Fals
 
 	if study=='macd':
 		figure=get_study(self,ta.macd,iplot_kwargs,iplot_study_kwargs,include=include,column=column,str=str,inset=False)
-	
+
 	if study=='sma':
 		study_kwargs.update({'periods':periods})
 		figure=get_study(self,ta.sma,iplot_kwargs,iplot_study_kwargs,include=include,column=column,str=str,inset=True)
@@ -1152,14 +1152,14 @@ def _ta_plot(self,study,periods=14,column=None,include=True,str=None,detail=Fals
 
 	if study=='correl':
 		study_kwargs.update({'periods':periods})
-		figure=get_study(self,ta.correl,iplot_kwargs,iplot_study_kwargs,include=include,column=column,str=str,inset=False)	
+		figure=get_study(self,ta.correl,iplot_kwargs,iplot_study_kwargs,include=include,column=column,str=str,inset=False)
 
 
 	## Exports
 
 	if asFigure:
 		return figure
-	else: 
+	else:
 		return iplot(figure,sharing=sharing,filename=filename)
 
 
