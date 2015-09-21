@@ -205,7 +205,7 @@ def universal_argument_tests():
         'gridcolor': ['grey'],
         'zerolinecolor': ['blue'],
         'margin': [(3, 4, 3, 1), {'l': 3, 'r': 5, 't': 1, 'b': 0}],
-        'secondary_y': ['c', ['b', 'c']],
+        'secondary_y': ['y', ['y', 'c']],
         'colors': [('blue', 'red', 'orange'),
                    {'x': 'blue', 'y': 'red', 'c': 'green'}],
         'subplots': [True]
@@ -222,9 +222,13 @@ def universal_argument_tests():
         self._iplot(self.df, kind='scatter3d', x='x', y='y',
                     z='c', size='c', **kwargs)
 
+    def heatmap_tests(self, **kwargs):
+        self._iplot(self.df, kind='heatmap')
+
     # _generate_tests(TestIPlot, iplot_tests, 'universal', options) # too many!
     _generate_tests(TestIPlot, scatter3d_tests, 'scatter3d', {})
     _generate_tests(TestIPlot, bubble3d_tests, 'bubble3d', {})
+    _generate_tests(TestIPlot, heatmap_tests, 'heatmap', {})
 
 
 def pie_argument_tests():
