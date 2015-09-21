@@ -191,8 +191,10 @@ def shape_input_argument_tests():
 def universal_argument_tests():
     # test all permutations of options that are shared across all chart types
     options = {
-        'kind': ['scatter', 'bar', 'box', 'spread', 'ratio', 'heatmap',
-                 'surface', 'histogram', 'bubble', 'bubble3d', 'scatter3d'],
+        'kind': ['scatter', 'bar', 'box', 'spread', 'ratio',
+                 'surface', 'histogram', 'bubble'],
+        # 'bubble3d', 'scatter3d'], # should this work?
+        # it doesn't work without specifying 'x', 'y', 'z'
         'title': ['my title'],
         'xTitle': ['my xaxis title'],
         'yTitle': ['my yaxis title'],
@@ -213,6 +215,16 @@ def universal_argument_tests():
         self._iplot(self.df, **kwargs)
 
     _generate_tests(TestIPlot, iplot_tests, 'universal', options)
+    def scatter3d_tests(self, **kwargs):
+        self._iplot(self.df, kind='scatter3d', x='x', y='y', z='c', **kwargs)
+
+    def bubble3d_tests(self, **kwargs):
+        self._iplot(self.df, kind='scatter3d', x='x', y='y',
+                    z='c', size='c', **kwargs)
+
+    # _generate_tests(TestIPlot, iplot_tests, 'universal', options) # too many!
+    _generate_tests(TestIPlot, scatter3d_tests, 'scatter3d', {})
+    _generate_tests(TestIPlot, bubble3d_tests, 'bubble3d', {})
 
 
 def pie_argument_tests():
@@ -236,7 +248,9 @@ def errorbar_argument_tests():
         'error_thickness': [5],
         'error_width': [3],
         'error_opacity': [0.5],
-        'kind': ['bar', 'barh', 'scatter', 'histogram', 'scatter3d']
+        'kind': ['bar', 'barh', 'scatter']
+        # 'scatter3d'] # see comment above
+        # - this doesn't work without specifying 'x', 'y', 'z'
     }
 
     def errorbar_tests(self, **kwargs):
