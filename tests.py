@@ -263,7 +263,7 @@ def pie_argument_tests():
     }
 
     def pie_tests(self, **kwargs):
-        self._iplot(self.df, kind='pie', **kwargs)
+        self._iplot(self.df, kind='pie', labels='x', values='y', **kwargs)
 
     _generate_tests(TestIPlot, pie_tests, 'pie', options)
 
